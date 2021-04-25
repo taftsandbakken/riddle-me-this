@@ -1,4 +1,5 @@
 export enum RiddleType {
+  All = 'All',
   Logic = 'Logic',
   Programming = 'Programming',
   WhatAmI = 'What Am I?',

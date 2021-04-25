@@ -1,6 +1,6 @@
 <div class="container">
   <div class="page-header">
-    <span class="page-header-text">Riddle Me This</span>
+    Riddle Me This
   </div>
 
   <img src="assets/loading.gif" alt="loading" class="loading-gif" *ngIf="pageState == PageState.Loading">
@@ -8,7 +8,7 @@
   <div *ngIf="pageState == PageState.Error" class="page-error-text">There was an error getting the riddles. Please try again later.</div>
 
   <div class="riddle-container" *ngIf="pageState == PageState.Ready">
-    <h3 class="category-header">
+    <div class="category-header">
       <div class="category-dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="DropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           {{riddleTypeSelected}}
@@ -18,8 +18,8 @@
         </ul>
       </div>
       <button type="button" class="btn btn-primary btn add-riddle-button" data-bs-toggle="modal" data-bs-target="#addRiddleModal"><span>+</span></button>
-      <input type="text" class="form-control search-box" (change)="searchInput = $event.target.value" placeholder="Search for riddles" aria-label="search" aria-describedby="search-for-riddles">
-    </h3>
+      <input type="text" class="form-control search-box" (keyup)="searchInput = $event.target.value; riddleTypeSelected = RiddleType.All" placeholder="Search for riddles" aria-label="search" aria-describedby="search-for-riddles">
+    </div>
 
     <div *ngIf="filterRiddles().length === 0" class="empty-state-text">Looks like there aren't any riddles in this category yet. Add some yourself with the "Add Riddle" button.</div>
 
@@ -66,6 +66,13 @@
             <input type="text" class="form-control" id="riddleTitle">
             <label for="riddleAuthor" class="col-form-label">Author:</label>
             <input type="text" class="form-control" id="riddleAuthor">
+            <label for="riddleCategory" class="col-form-label">Riddle Category:</label>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="DropdownMenuButtonInModal" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ riddleTypeSelectedForAdd }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li *ngFor="let t of RiddleType | keyvalue"><a class="dropdown-item" (click)="riddleTypeSelectedForAdd = t.value">{{t.value}}</a></li>
+            </ul>
           </div>
           <div class="mb-3">
             <label for="riddle-upload" class="col-form-label">Upload Image or mp4:</label>

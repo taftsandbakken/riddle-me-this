@@ -6,22 +6,13 @@
 .container {
   .page-header {
     background-color: #E7E7E7;
-    padding: 40px 0 16px 0;
-
-    img {
-      float: left;
-      width: 48px;
-      margin-right: 16px;
-    }
-
-    .page-header-text {
-      color: black;
-      font-family: 'PunkEvent';
-      font-size: 85px;
-      line-height: 48px;
-      display: block;
-      text-align: center;
-    }
+    margin:22px 0 16px 0;
+    color: black;
+    font-family: 'PunkEvent';
+    font-size: 85px;
+    line-height: 1;
+    display: block;
+    text-align: center;
   }
 
   .loading-gif {
@@ -135,5 +126,21 @@
 @media only screen and (max-width: 768px) {
   .add-riddle-modal {
     max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .container {
+    .riddle-container {
+      .category-header {
+        height: 94px;
+
+        .search-box {
+          float: left;
+          margin-top: 12px;
+          margin-right: 100%;
+        }
+      }
+    }
   }
 }

@@ -9,6 +9,7 @@ export enum PageState {
   Error = 'Error'
 }
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit {
 
   pageState = PageState.Loading;
   riddleList: Riddle[] = [];
-  riddleTypeSelected: RiddleType = RiddleType.Logic;
+  riddleTypeSelected: RiddleType = RiddleType.All;
+  riddleTypeSelectedForAdd: RiddleType = RiddleType.Logic;
   selectedFile: File;
   isAddRiddleLoading = false;
   searchInput = '';
@@ -104,7 +106,8 @@ export class AppComponent implements OnInit {
   filterRiddles(): Riddle[] {
     return this.riddleList
       .sort((r1, r2) => r1.title > r2.title ? 1 : -1)
-      .filter(r => r.type === this.riddleTypeSelected && this.filterBySearch(r));
+      .filter(r => (this.riddleTypeSelected === RiddleType.All || r.type === this.riddleTypeSelected) &&
+        this.filterBySearch(r));
   }
 
   filterBySearch(r: Riddle): boolean {
@@ -127,7 +130,7 @@ export class AppComponent implements OnInit {
       title: form['riddleTitle'].value,
       author: form['riddleAuthor'].value,
       date: new Date().toLocaleString(),
-      type: this.riddleTypeSelected,
+      type: this.riddleTypeSelectedForAdd,
       data: this.selectedFile ? this.selectedFile.name : form['riddleText'].value,
       dataType: !this.selectedFile ?
         RiddleDataType.Text :
