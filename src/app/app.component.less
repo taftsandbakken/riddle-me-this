@@ -1,0 +1,139 @@
+@font-face {
+  font-family: 'PunkEvent';
+  src: url('/assets/punkevent/PunkEvent.ttf') format('truetype')
+}
+
+.container {
+  .page-header {
+    background-color: #E7E7E7;
+    padding: 40px 0 16px 0;
+
+    img {
+      float: left;
+      width: 48px;
+      margin-right: 16px;
+    }
+
+    .page-header-text {
+      color: black;
+      font-family: 'PunkEvent';
+      font-size: 85px;
+      line-height: 48px;
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .loading-gif {
+    margin: 50px auto;
+    display: block;
+    width: 60px;
+  }
+
+  .page-error-text {
+    margin-top: 60px;
+    text-align: center;
+  }
+
+  .riddle-container {
+    .category-header {
+      margin-top: 24px;
+      margin-bottom: 24px;
+
+      .add-riddle-button {
+        float: right;
+        font-size: 24px;
+        margin-top: 6px;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+
+        span {
+          margin-top: -5px;
+          display: block;
+        }
+      }
+
+      .search-box {
+        width: 200px;
+        display: inline;
+        float: right;
+        margin-top: 3px;
+        margin-right: 12px;
+      }
+    }
+
+    .category-dropdown {
+      display: initial;
+      cursor: pointer;
+
+      .dropdown-toggle {
+        font-size: 20px;
+      }
+
+      .dropdown-menu {
+        font-size: 14px;
+      }
+    }
+
+    .empty-state-text {
+      text-align: center;
+      margin-top: 64px;
+    }
+
+    .card {
+      margin-bottom: 24px;
+
+      .riddle-author {
+        margin: 0 4px;
+      }
+
+      .delete-button {
+        width: 26px;
+        float: right;
+        cursor: pointer;
+        margin-right: 12px;
+        display: none;
+      }
+
+      .riddle-date {
+        float: right;
+      }
+
+      &:hover .delete-button {
+        display: initial;
+      }
+
+      .card-body {
+        .preview-media {
+          max-height: 400px;
+          max-width: 100%;
+          margin: 0 auto;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.add-riddle-modal {
+  padding-right: 0px !important;
+
+  .col-form-label {
+    display: block;
+  }
+
+  #riddleText {
+    min-height: 105px;
+  }
+
+  .add-riddle-loading-gif {
+    width: 24px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .add-riddle-modal {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,48 @@
+{
+    "paths": [
+        {
+            "name": "/riddlesapi",
+            "lambdaFunction": "riddlesapi5cd13cf4",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            },
+            "policyResourceName": "/riddlesapi"
+        }
+    ],
+    "resourceName": "myapi",
+    "apiName": "myapi",
+    "functionArns": [
+        {
+            "lambdaFunction": "riddlesapi5cd13cf4"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "amplify-riddlesapi-dev-211857-authRole",
+        "unAuthRoleName": "amplify-riddlesapi-dev-211857-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "riddlesapi5cd13cf4",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

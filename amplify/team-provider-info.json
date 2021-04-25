@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-riddlesapi-dev-211857-authRole",
+      "UnauthRoleArn": "arn:aws:iam::567690819036:role/amplify-riddlesapi-dev-211857-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::567690819036:role/amplify-riddlesapi-dev-211857-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-riddlesapi-dev-211857-deployment",
+      "UnauthRoleName": "amplify-riddlesapi-dev-211857-unauthRole",
+      "StackName": "amplify-riddlesapi-dev-211857",
+      "StackId": "arn:aws:cloudformation:eu-west-1:567690819036:stack/amplify-riddlesapi-dev-211857/7c2c4cc0-a319-11eb-aa07-0ac4e6386883",
+      "AmplifyAppId": "djcpovnsnrepw"
+    },
+    "categories": {
+      "auth": {
+        "cognito8f0d0059": {}
+      },
+      "function": {
+        "riddlesapi5cd13cf4": {
+          "deploymentBucketName": "amplify-riddlesapi-dev-211857-deployment",
+          "s3Key": "amplify-builds/riddlesapi5cd13cf4-78523173563575714463-build.zip"
+        }
+      }
+    }
+  }
+}

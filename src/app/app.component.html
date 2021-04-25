@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="page-header">
+    <span class="page-header-text">Riddle Me This</span>
+  </div>
+
+  <img src="assets/loading.gif" alt="loading" class="loading-gif" *ngIf="pageState == PageState.Loading">
+
+  <div *ngIf="pageState == PageState.Error" class="page-error-text">There was an error getting the riddles. Please try again later.</div>
+
+  <div class="riddle-container" *ngIf="pageState == PageState.Ready">
+    <h3 class="category-header">
+      <div class="category-dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="DropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          {{riddleTypeSelected}}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li *ngFor="let t of RiddleType | keyvalue"><a class="dropdown-item" (click)="riddleTypeSelected = t.value">{{t.value}}</a></li>
+        </ul>
+      </div>
+      <button type="button" class="btn btn-primary btn add-riddle-button" data-bs-toggle="modal" data-bs-target="#addRiddleModal"><span>+</span></button>
+      <input type="text" class="form-control search-box" (change)="searchInput = $event.target.value" placeholder="Search for riddles" aria-label="search" aria-describedby="search-for-riddles">
+    </h3>
+
+    <div *ngIf="filterRiddles().length === 0" class="empty-state-text">Looks like there aren't any riddles in this category yet. Add some yourself with the "Add Riddle" button.</div>
+
+    <div class="card" *ngFor="let r of filterRiddles(); index as i">
+      <div class="card-header">
+        <b>{{r.title}}</b>
+        <span class="riddle-author">by {{r.author}}</span>
+        <span class="riddle-date">{{r.date | date}}</span>
+        <img class="delete-button"
+          (click)="deleteRiddle(r.id)"
+          src="https://www.freeiconspng.com/uploads/remove-icon-png-26.png">
+      </div>
+      <div class="card-body">
+        <p *ngIf="r.dataType === RiddleDataType.Text" class="card-text">{{r.data}}</p>
+        <img [src]="r.data"
+          class="preview-media"
+          *ngIf="r.dataType === RiddleDataType.Img">
+        <video width="320"
+          height="240"
+          class="preview-media"
+          id="video-media"
+          controls
+          *ngIf="r.dataType === RiddleDataType.MP4">
+          <source [src]="r.data"
+            type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="add-riddle-modal modal fade" #addRiddleModal id="addRiddleModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Upload Riddle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #newRiddleForm>
+          <div class="mb-3">
+            <label for="riddleTitle" class="col-form-label">Title:</label>
+            <input type="text" class="form-control" id="riddleTitle">
+            <label for="riddleAuthor" class="col-form-label">Author:</label>
+            <input type="text" class="form-control" id="riddleAuthor">
+          </div>
+          <div class="mb-3">
+            <label for="riddle-upload" class="col-form-label">Upload Image or mp4:</label>
+            <input class="form-control" type="file" id="formFile" (accept)="VALID_FILE_TYPES" (change)="onFileSelected($event.target.files)">
+            <div *ngIf="!selectedFile">
+              <label class="col-form-label">----- Or -----</label>
+              <label for="riddleText" class="col-form-label">Input Riddle:</label>
+              <textarea class="form-control" id="riddleText"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <img src="assets/loading.gif" alt="loading" class="add-riddle-loading-gif" *ngIf="isAddRiddleLoading">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" [disabled]="isAddRiddleLoading" (click)="addRiddle(addRiddleModal, newRiddleForm)">Add Riddle</button>
+      </div>
+    </div>
+  </div>
+</div>

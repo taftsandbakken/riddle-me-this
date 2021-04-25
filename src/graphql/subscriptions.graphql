@@ -1,0 +1,40 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateRiddle {
+  onCreateRiddle {
+    id
+    title
+    author
+    date
+    type
+    data
+    dataType
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateRiddle {
+  onUpdateRiddle {
+    id
+    title
+    author
+    date
+    type
+    data
+    dataType
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteRiddle {
+  onDeleteRiddle {
+    id
+    title
+    author
+    date
+    type
+    data
+    dataType
+    createdAt
+    updatedAt
+  }
+}

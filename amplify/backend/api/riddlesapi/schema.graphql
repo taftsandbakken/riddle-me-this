@@ -1,0 +1,9 @@
+type Riddle @model {
+  id: ID!
+  title: String!
+  author: String!
+  date: String!
+  type: String!
+  data: String!
+  dataType: String!
+}

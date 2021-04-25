@@ -1,0 +1,49 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateRiddle(
+  $input: CreateRiddleInput!
+  $condition: ModelRiddleConditionInput
+) {
+  createRiddle(input: $input, condition: $condition) {
+    id
+    title
+    author
+    date
+    type
+    data
+    dataType
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateRiddle(
+  $input: UpdateRiddleInput!
+  $condition: ModelRiddleConditionInput
+) {
+  updateRiddle(input: $input, condition: $condition) {
+    id
+    title
+    author
+    date
+    type
+    data
+    dataType
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteRiddle(
+  $input: DeleteRiddleInput!
+  $condition: ModelRiddleConditionInput
+) {
+  deleteRiddle(input: $input, condition: $condition) {
+    id
+    title
+    author
+    date
+    type
+    data
+    dataType
+    createdAt
+    updatedAt
+  }
+}
