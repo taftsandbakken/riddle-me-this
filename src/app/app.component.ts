@@ -9,7 +9,6 @@ export enum PageState {
   Error = 'Error'
 }
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -31,19 +30,17 @@ export class AppComponent implements OnInit {
 
   public readonly VALID_FILE_TYPES = 'image/png, image/jpeg, image/jpg, video/mp4';
   private readonly VALID_VIDEO_TYPES = [ 'video/mp4' ];
-  private readonly debug = true;
 
   constructor(
     private riddleService: RiddleService) {}
 
-  // Get and sort riddles
+  // Get riddles
   ngOnInit() {
     this.riddleService.getRiddles().then(result => {
       this.riddleList = result;
       this.pageState = PageState.Ready;
     })
-    .catch(e => {
-      this.log('Error fetching riddles', e);
+    .catch(() => {
       this.pageState = PageState.Error;
     });
   }
@@ -60,8 +57,7 @@ export class AppComponent implements OnInit {
       modal.click();
       this.isAddRiddleLoading = false;
     })
-    .catch(e => {
-      this.log('error adding riddle', e);
+    .catch(() => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -90,8 +86,7 @@ export class AppComponent implements OnInit {
             'success'
           );
         })
-        .catch(e => {
-          this.log('Error deleting riddle', e);
+        .catch(() => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -102,7 +97,12 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // Only return riddles of the selected type
+   // Select first file from explorer
+  onFileSelected(files: any[]) {
+    this.selectedFile = !files || files.length === 0 ? null : files[0];
+  }
+
+  // Sort and return riddles of the selected type
   filterRiddles(): Riddle[] {
     return this.riddleList
       .sort((r1, r2) => r1.title > r2.title ? 1 : -1)
@@ -110,17 +110,13 @@ export class AppComponent implements OnInit {
         this.filterBySearch(r));
   }
 
-  filterBySearch(r: Riddle): boolean {
+  // Determine if a riddle should be shown based on the search text
+  private filterBySearch(r: Riddle): boolean {
     const searchText = this.searchInput.trim().toLocaleLowerCase();
     return !this.searchInput ||
       r.author.toLocaleLowerCase().includes(searchText) ||
-      r.data.toLocaleLowerCase().includes(searchText) ||
+      (r.dataType === RiddleDataType.Text && r.data.toLocaleLowerCase().includes(searchText)) ||
       r.title.toLocaleLowerCase().includes(searchText);
-  }
-
-  // Select file from explorer
-  onFileSelected(files: any[]) {
-    this.selectedFile = !files || files.length === 0 ? null : files[0];
   }
 
   // Create a new Riddle object
@@ -138,12 +134,5 @@ export class AppComponent implements OnInit {
           RiddleDataType.MP4 :
           RiddleDataType.Img
     };
-  }
-
-  // If in debug mode, console log the parameters
-  private log(title: string, obj?: any) {
-    if (this.debug) {
-      console.log(title, obj);
-    }
   }
 }
