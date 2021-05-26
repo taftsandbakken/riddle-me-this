@@ -5,6 +5,8 @@ A Media Collection Application Experiment
 # Summary
 This was an web application I wrote to teach myself more about creating websites from scratch and how to use AWS.
 
+This project points to a free AWS account and currently I have it disabled to prevent people from spamming it.
+
 # Installation
 
 ```sh
